@@ -25,7 +25,7 @@ SECRET_KEY = 'm%(*780af88pht&(qvp2sjy1r_7hlvryj=zh9y=0f3*2-ka*a*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -37,7 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blogger'
+    'blogger',
+    'django.contrib.sites',
+    'disqus',
+    'django_forms_bootstrap',
+    'django_gravatar',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -100,6 +105,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.EmailAuth'
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -119,3 +129,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+DISQUS_WEBSITE_SHORTNAME = 'nielspython3blog'
+SITE_ID = 1
+
+DEFAULT_FROM_EMAIL = 'noreply@example.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
